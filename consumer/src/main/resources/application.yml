@@ -1,0 +1,40 @@
+server:
+  port: 8080 #启动端口
+spring:
+  application:
+    name: consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 # 注册中心地址
+        service: ${spring.application.name}
+ribbon:
+  ReadTimeout:  5000 #连接超时
+  ConnectTimeout: 5000 #连接时间
+logging:
+  level:
+    org.example.consumer.feign.ProviderClient: debug #日志等级
+#默认是不支持的，所以这里要开启，设置为true
+feign:
+  hystrix:
+    enabled: true #开启feign的hystrix支持,默认是false
+  httpclient:
+    enabled: true #feign使用httpclient
+  okhttp:
+    enabled: false #feign用okhttp 进行通信
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 5000 #降级处理时间
+provider:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #负载模式
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #配置规则 随机
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RoundRobinRule #配置规则 轮询
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RetryRule #配置规则 重试
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.WeightedResponseTimeRule #配置规则 响应时间权重
+    #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.BestAvailableRule #配置规则 最空闲连接策略
