@@ -1,7 +1,7 @@
 1.使用nacos作为服务注册和发现
 2.使用nacos作为配置中心，配置主要是在provider模块体现
 3.使用okhttp还没有成功
-4.下载默认的nacos默认启动之后在分别启动提供者和消费者即可
+4.下载默认的nacos默认启动之后在分别启动提供者和消费者即可 可以
 ![Image text](https://github.com/lgg476864889/spring-cloud-demo/blob/main/provider/src/main/resources/%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83.png)
 配置中心值：
 server:
